@@ -1,0 +1,70 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Html } from "@react-three/drei";
+import DashboardCard from "./DashboardCard";
+
+export default function App() {
+  const dashboards = [
+    {
+      id: "sales",
+      title: "Global Sales 2024",
+      src: "https://your-username.github.io/dashboards/sales/index.html",
+      position: [-2, 1, -5],
+    },
+    // …more dashboards
+  ];
+
+  return (
+    <Canvas camera={{ position: [0, 2, 8] }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[3, 5, 2]} />
+      {dashboards.map((d) => (
+        <DashboardCard key={d.id} {...d} />
+      ))}
+      <OrbitControls enablePan={false} />
+    </Canvas>
+  );
+}
+
